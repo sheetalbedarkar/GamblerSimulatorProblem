@@ -10,7 +10,7 @@ amount=0
 winAmount=0
 lostAmount=0
 
-	while [ $totalAmount -le 105 -a $totalAmount -ge 95 ]
+	while [ $totalAmount -lt 150 -a $totalAmount -gt 50 ]
 	do
 	randomCheck=$((RANDOM%2))
 
@@ -19,7 +19,7 @@ lostAmount=0
 			message="You Lost"
 			amount=$(($amount-1))
 			totalAmount=$(($STAKE+$amount))
-			lostAmount=$(($lostAmount-1))
+			lostAmount=$(($lostAmount+1))
 
 		elif [ $randomCheck -eq 1 ] 
 		then
@@ -30,10 +30,16 @@ lostAmount=0
 		fi
 
 	done
-	message="You are done for the day. Please come on next day"
-	echo "$day"
-	echo "$winAmount"
-	echo "$lostAmount"
+	echo "You are done for the day. Please come on next day"
+
 	amountOnDay=$(($winAmount-$lostAmount))
 	totalAmountOf20Days=$(($totalAmountOf20Days + $amount))
+
+	if [ $totalAmount -eq 150 ]
+	then
+		echo "You won on day $day by $winAmount"
+	elif [ $totalAmount -eq 50 ]
+	then 
+		echo "You lost on day $day by $lostAmount"
+	fi
 done
