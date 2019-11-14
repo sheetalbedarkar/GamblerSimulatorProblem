@@ -2,7 +2,11 @@
 STAKE=100
 BET=1
 totalAmountOf20Days=0
-
+while [ $maxWin -ge $maxLost ]
+do
+echo "You won maximum times so you can play more 20 days"
+maxWin=0
+maxLost=0
 for day in {1..20}
 do
 totalAmount=$STAKE
@@ -46,8 +50,11 @@ lostAmount=0
 	if [ $winAmount -gt $lostAmount ]
 	then
 		echo "It's your luckiest day $day, You won maximum $winAmount times"
+		maxWin=$(( $maxWin + 1 ))
 	elif [ $lostAmount -gt $winAmount ]
 	then
 		echo "It's your unluckiest day $day, You lost maximum $lostAmount times"
+		maxLost=$(( $maxLost + 1 ))
 	fi
+done
 done
