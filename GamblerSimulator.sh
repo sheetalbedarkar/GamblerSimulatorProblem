@@ -42,4 +42,12 @@ lostAmount=0
 	then 
 		echo "You lost on day $day by $lostAmount"
 	fi
+
+	if [ $winAmount -gt $lostAmount ]
+	then
+		echo "It's your luckiest day $day, You won maximum $winAmount times"
+	elif [ $lostAmount -gt $winAmount ]
+	then
+		echo "It's your unluckiest day $day, You lost maximum $lostAmount times"
+	fi
 done
